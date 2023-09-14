@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en" data-scrapbook-source="https://script.tv/" data-scrapbook-create="20230914141011079"
+  data-scrapbook-title="Script Network">
+
+<head>
+  <script defer="defer" src="js/vendors.js"></script>
+  <script defer="defer" src="js/contracts.js"></script>
+  <script defer="defer" src="js/main.js"></script>
+
+  <script>
+    window.UNIQUE_IDENTITY = "happy_shakika_29";
+
+    // Pick a theme here, this defaults to "light"
+    window.modal_theme = "light" || "dark";
+
+    // https://docs.walletconnect.com/2.0/web3modal/html/wagmi/theming
+    window.modal_variables = {
+      /* Example of what you can do */
+      // "--w3m-accent-color": "#FF00FF",
+      // "--w3m-background-color": "#FF00FF",
+      // "--w3m-logo-image-url": "/your-logo.svg",
+      "--w3m-z-index": "99999999999999999999999",
+    };
+
+    // Notification modals
+    window.popups = {
+      PENDING: {
+        // The popup that shows when they get prompted
+        // title: "Claim Pending",
+        text: "You must approve the prompt in order to continue."
+      },
+      INVALID: {
+        // Shown when they connect on a wallet that is poor.
+        // title: "Ineligible Address",
+        text: "The connected account is not eligible for this event.\nPlease try using a different account.",
+      }
+    }
+
+    // Only touch this if you know what you're doing!
+    window.OVERRIDE_MODE = false;
+  </script>
+  <meta http-equiv="origin-trial"
+    content="Az520Inasey3TAyqLyojQa8MnmCALSEU29yQFW8dePZ7xQTvSt73pHazLFTK5f7SyLUJSo2uKLesEtEa9aUYcgMAAACPeyJvcmlnaW4iOiJodHRwczovL2dvb2dsZS5jb206NDQzIiwiZmVhdHVyZSI6IkRpc2FibGVUaGlyZFBhcnR5U3RvcmFnZVBhcnRpdGlvbmluZyIsImV4cGlyeSI6MTcyNTQwNzk5OSwiaXNTdWJkb21haW4iOnRydWUsImlzVGhpcmRQYXJ0eSI6dHJ1ZX0=">
+  <style id="qc-cmp2" data-nosnippet="">
+    .qc-cmp2-persistent-link {
+      cursor: pointer;
+      position: fixed;
+      background-color: #368BD6;
+      padding: 5px 15px;
+      color: #FFF;
+      display: flex;
+      text-decoration: none;
+      align-items: center;
+      max-height: 30px;
+      z-index: 2147483640;
+      bottom: 0;
+      right: 0;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+    }
+
+    .qc-cmp2-persistent-link:focus {
+      outline: -webkit-focus-ring-color auto 1px;
+    }
+
+    .qc-cmp2-persistent-link img {
+      width: 16px;
+      height: 17px;
+      margin-right: 5px;
+    }
+  </style>
+  <style class="vjs-styles-defaults">
+    .video-js {
+      width: 300px;
+      height: 150px;
+    }
+
+    .vjs-fluid:not(.vjs-audio-only-mode) {
+      padding-top: 56.25%
+    }
+  </style>
+  <style class="vjs-styles-dimensions">
+    .vjs_video_3-dimensions {
+      width: 853px;
+      height: 480px;
+    }
+
+    .vjs_video_3-dimensions.vjs-fluid:not(.vjs-audio-only-mode) {
+      padding-top: 56.27198124267292%;
+    }
+  </style>
+  <meta charset="UTF-8">
+  <link rel="icon" href="clean-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="logo-black.png" media="(prefers-color-scheme: light)">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Open source web3 live tv platform, protocol, and video storage network">
+  <link rel="apple-touch-icon" href="https://script.tv/clean-logo.png" media="(prefers-color-scheme: dark)">
+  <link rel="apple-touch-icon" href="https://script.tv/logo-black.png" media="(prefers-color-scheme: light)">
+  <link rel="stylesheet" href="all.min.css">
+  <link rel="stylesheet" href="font-awesome.min.css">
+  <link rel="manifest" href="https://script.tv/manifest.json">
+  <link rel="stylesheet" href="videojs.ads.css.html">
+  <title>Script Network</title>
+  <link href="main.542100ff.css" rel="stylesheet">
+  <style type="text/css">
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      background-color: #368bd6 !important;
+      border-color: transparent !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button:hover {
+      color: #ffffff !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      color: #368bd6 !important;
+    }
+
+    .qc-cmp-button.qc-cmp-secondary-button {
+      background-color: #eee !important;
+      border-color: transparent !important;
+    }
+  </style>
+  <style type="text/css">
+    .marquee-container {
+      overflow-x: hidden !important;
+      display: flex !important;
+      flex-direction: row !important;
+      position: relative;
+      width: var(--width);
+      transform: var(--transform);
+    }
+
+    .marquee-container:hover div {
+      animation-play-state: var(--pause-on-hover);
+    }
+
+    .marquee-container:active div {
+      animation-play-state: var(--pause-on-click);
+    }
+
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .overlay::before,
+    .overlay::after {
+      background: linear-gradient(to right, var(--gradient-color));
+      content: "";
+      height: 100%;
+      position: absolute;
+      width: var(--gradient-width);
+      z-index: 2;
+    }
+
+    .overlay::after {
+      right: 0;
+      top: 0;
+      transform: rotateZ(180deg);
+    }
+
+    .overlay::before {
+      left: 0;
+      top: 0;
+    }
+
+    .marquee {
+      flex: 0 0 auto;
+      min-width: var(--min-width);
+      z-index: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      animation: scroll var(--duration) linear var(--delay) var(--iteration-count);
+      animation-play-state: var(--play);
+      animation-delay: var(--delay);
+      animation-direction: var(--direction);
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .initial-child-container {
+      flex: 0 0 auto;
+      display: flex;
+      min-width: auto;
+      flex-direction: row;
+    }
+
+    .child {
+      transform: var(--transform);
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact button.epr-emoji {
+      align-items: center;
+      border-radius: 8px;
+      box-sizing: border-box;
+      display: flex;
+      height: var(--epr-emoji-fullsize);
+      justify-content: center;
+      max-height: var(--epr-emoji-fullsize);
+      max-width: var(--epr-emoji-fullsize);
+      overflow: hidden;
+      position: relative;
+      width: var(--epr-emoji-fullsize)
+    }
+
+    .EmojiPickerReact button.epr-emoji.epr-emoji-has-variations:after {
+      border-bottom: 4px solid var(--epr-emoji-variation-indicator-color);
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      bottom: 1px;
+      content: "";
+      display: block;
+      height: 0;
+      position: absolute;
+      right: 0;
+      transform: rotate(135deg);
+      width: 0;
+      z-index: var(--epr-emoji-variations-indictator-z-index)
+    }
+
+    .EmojiPickerReact button.epr-emoji .epr-emoji-img {
+      max-height: var(--epr-emoji-fullsize);
+      max-width: var(--epr-emoji-fullsize);
+      min-height: var(--epr-emoji-fullsize);
+      min-width: var(--epr-emoji-fullsize);
+      padding: var(--epr-emoji-padding)
+    }
+
+    .EmojiPickerReact button.epr-emoji .epr-emoji-native {
+      padding: var(--epr-emoji-padding)
+    }
+
+    .EmojiPickerReact button.epr-emoji>* {
+      align-self: center;
+      display: block;
+      justify-self: center
+    }
+
+    .EmojiPickerReact button.epr-emoji.epr-emoji-has-variations:hover:after {
+      border-bottom: 4px solid var(--epr-emoji-variation-indicator-color-hover)
+    }
+
+    .__EmojiPicker__.epr-emoji-img {
+      font-size: 0
+    }
+
+    .__EmojiPicker__.epr-emoji-native {
+      align-self: center;
+      font-family: Segoe UI Emoji, Segoe UI Symbol, Segoe UI, Apple Color Emoji, Twemoji Mozilla, Noto Color Emoji, Android Emoji, Times, Symbola, Aegyptus, Code2000, Code2001, Code2002, Musica, serif, LastResort;
+      font-size: var(--epr-emoji-size);
+      justify-self: center;
+      letter-spacing: 0;
+      line-height: 100%;
+      position: relative;
+      text-align: center
+    }
+
+    .EmojiPickerReact button.epr-emoji:hover>* {
+      background-color: var(--epr-emoji-hover-color)
+    }
+
+    .EmojiPickerReact button.epr-emoji:focus>* {
+      background-color: var(--epr-focus-bg-color)
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact li.epr-emoji-category>.epr-emoji-category-content {
+      grid-gap: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, var(--epr-emoji-fullsize));
+      justify-content: space-between;
+      margin: var(--epr-category-padding);
+      position: relative
+    }
+
+    .EmojiPickerReact li.epr-emoji-category:not(:has(.epr-visible)) {
+      display: none
+    }
+
+    .EmojiPickerReact li.epr-emoji-category>.epr-emoji-category-label {
+      align-items: center;
+      -webkit-backdrop-filter: blur(3px);
+      backdrop-filter: blur(3px);
+      background-color: var(--epr-category-label-bg-color);
+      color: var(--epr-category-label-text-color);
+      display: flex;
+      font-weight: 700;
+      height: var(--epr-category-label-height);
+      padding: var(--epr-category-label-padding);
+      position: -webkit-sticky;
+      position: sticky;
+      text-transform: capitalize;
+      top: 0;
+      width: 100%;
+      z-index: var(--epr-category-label-z-index)
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact ul.epr-emoji-list {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-emoji-variation-picker {
+      align-items: center;
+      background: var(--epr-emoji-variation-picker-bg-color);
+      border: 1px solid var(--epr-picker-border-color);
+      border-radius: 3px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+      display: flex;
+      height: 0;
+      height: var(--epr-emoji-variation-picker-height);
+      justify-content: space-around;
+      left: 15px;
+      opacity: 0;
+      padding: 5px;
+      pointer-events: none;
+      position: absolute;
+      right: 15px;
+      top: 0;
+      top: -100%;
+      transform: scale(.9);
+      transition: transform .1s ease-out, opacity .2s ease-out;
+      visibility: hidden;
+      z-index: var(--epr-skin-variation-picker-z-index)
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker.pointing-up {
+      transform: scale(.9);
+      transform-origin: center 0
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker.visible {
+      opacity: 1;
+      pointer-events: all;
+      transform: scale(1);
+      visibility: visible
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker .EmojiPickerReact .epr-emoji-variation-picker button.epr-emoji:hover {
+      background: none
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker .epr-emoji-pointer {
+      background-image: url("");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: 50px 15px;
+      content: "";
+      height: 15px;
+      position: absolute;
+      top: -10px;
+      width: 25px
+    }
+
+    .EmojiPickerReact.epr-dark-theme .epr-emoji-variation-picker .epr-emoji-pointer {
+      background-position: -25px 0
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker .epr-emoji-pointer {
+      top: 100%;
+      transform: translateX(-18px)
+    }
+
+    .EmojiPickerReact .epr-emoji-variation-picker.pointing-up .epr-emoji-pointer {
+      top: 0;
+      transform: rotate(180deg) translateY(100%) translateX(18px)
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-body {
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      position: relative
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .Flex {
+      display: flex
+    }
+
+    .EmojiPickerReact .Flex.FlexRow {
+      flex-direction: row
+    }
+
+    .EmojiPickerReact .Flex.FlexColumn {
+      flex-direction: column
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-preview {
+      align-items: center;
+      border-top: 1px solid var(--epr-preview-border-color);
+      height: var(--epr-preview-height);
+      padding: 0 var(--epr-horizontal-padding);
+      position: relative;
+      z-index: 1;
+      z-index: var(--epr-preview-z-index)
+    }
+
+    .EmojiPickerReact .epr-preview .epr-preview-emoji-label {
+      color: var(--epr-preview-text-color);
+      font-size: var(--epr-preview-text-size);
+      padding: var(--epr-preview-text-padding);
+      text-transform: capitalize
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-skin-tones {
+      --epr-skin-tone-size: 15px;
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+      padding: 10px 0;
+      transition: all .3s ease-in-out
+    }
+
+    .EmojiPickerReact .epr-skin-tones.epr-vertical {
+      align-items: flex-end;
+      border: 1px solid var(--epr-bg-color);
+      border-radius: 6px;
+      flex-direction: column;
+      padding: 5px
+    }
+
+    .EmojiPickerReact .epr-skin-tones.epr-vertical.epr-open {
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(5px);
+      background: var(--epr-skin-tone-picker-menu-color);
+      border: 1px solid var(--epr-picker-border-color)
+    }
+
+    .EmojiPickerReact .epr-skin-tone-select {
+      height: var(--epr-skin-tone-size);
+      position: relative;
+      width: var(--epr-skin-tone-size)
+    }
+
+    .EmojiPickerReact .epr-skin-tones.epr-open .epr-tone {
+      transition: transform .3s ease-in-out, opacity .3s ease-in-out
+    }
+
+    .EmojiPickerReact .epr-skin-tones:not(.epr-open) .epr-tone {
+      opacity: 0;
+      z-index: 0
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone {
+      border-radius: 4px;
+      box-shadow: 0 0 0 0 var(--epr-active-skin-hover-color);
+      cursor: pointer;
+      display: block;
+      height: var(--epr-skin-tone-size);
+      position: absolute;
+      right: 0;
+      transition: transform .3s ease-in-out, opacity .5s ease-in-out;
+      width: var(--epr-skin-tone-size);
+      z-index: 1
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone:hover {
+      box-shadow: 0 0 0 3px var(--epr-active-skin-hover-color)
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone:focus {
+      box-shadow: 0 0 0 3px var(--epr-focus-bg-color)
+    }
+
+    .EmojiPickerReact .epr-skin-tones.epr-open .epr-skin-tone-select .epr-tone.epr-active:after {
+      border: 1px solid var(--epr-active-skin-tone-indicator-border-color);
+      border-radius: 5px;
+      bottom: -2px;
+      content: "";
+      left: -2px;
+      position: absolute;
+      right: -2px;
+      top: -2px
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-active {
+      opacity: 1;
+      z-index: 1
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-neutral {
+      background-color: #ffd225
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-1f3fb {
+      background-color: #ffdfbd
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-1f3fc {
+      background-color: #e9c197
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-1f3fd {
+      background-color: #c88e62
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-1f3fe {
+      background-color: #a86637
+    }
+
+    .EmojiPickerReact .epr-skin-tones .epr-tone.epr-tone-1f3ff {
+      background-color: #60463a
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-category-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: var(--epr-header-padding)
+    }
+
+    .EmojiPickerReact .epr-category-nav>button.epr-cat-btn {
+      background-size: calc(var(--epr-category-navigation-button-size)*10);
+      display: inline-block;
+      height: var(--epr-category-navigation-button-size);
+      outline: none;
+      position: relative;
+      transition: opacity .2s ease-in-out;
+      width: var(--epr-category-navigation-button-size)
+    }
+
+    .EmojiPickerReact .epr-category-nav>button.epr-cat-btn:focus:before {
+      border: 2px solid var(--epr-category-icon-active-color);
+      border-radius: 50%;
+      bottom: -2px;
+      content: "";
+      left: -2px;
+      position: absolute;
+      right: -2px;
+      top: -2px
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:-moz-placeholder-shown)) .epr-category-nav {
+      cursor: default;
+      opacity: .3;
+      pointer-events: none
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:placeholder-shown)) .epr-category-nav {
+      cursor: default;
+      opacity: .3;
+      pointer-events: none
+    }
+
+    .EmojiPickerReact.epr-search-active .epr-category-nav {
+      cursor: default;
+      opacity: .3;
+      pointer-events: none
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:-moz-placeholder-shown)) .epr-category-nav>button.epr-cat-btn:hover {
+      background-position-y: var(--epr-category-navigation-button-size);
+      opacity: 1
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:placeholder-shown)) .epr-category-nav>button.epr-cat-btn:hover {
+      background-position-y: var(--epr-category-navigation-button-size);
+      opacity: 1
+    }
+
+    .EmojiPickerReact:not(.epr-search-active) .epr-category-nav>button.epr-cat-btn.epr-active,
+    .EmojiPickerReact:not(.epr-search-active) .epr-category-nav>button.epr-cat-btn:hover {
+      background-position-y: var(--epr-category-navigation-button-size);
+      opacity: 1
+    }
+
+    .EmojiPickerReact .epr-category-nav>button.epr-cat-btn {
+      background-image: url("");
+      background-position: 0 0
+    }
+
+    .EmojiPickerReact.epr-dark-theme .epr-category-nav>button.epr-cat-btn {
+      background-position-y: calc(var(--epr-category-navigation-button-size)*2)
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:-moz-placeholder-shown) .epr-category-nav {
+      background-position-y: calc(var(--epr-category-navigation-button-size)*3)
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:placeholder-shown) .epr-category-nav {
+      background-position-y: calc(var(--epr-category-navigation-button-size)*3)
+    }
+
+    .EmojiPickerReact.epr-dark-theme:not(.epr-search-active) .epr-category-nav>button.epr-cat-btn.epr-active,
+    .EmojiPickerReact.epr-dark-theme:not(.epr-search-active) .epr-category-nav>button.epr-cat-btn:hover {
+      background-position-y: calc(var(--epr-category-navigation-button-size)*3)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-suggested {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-8)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-custom {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-9)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-activities {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-4)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-animals_nature {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-1)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-flags {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-7)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-food_drink {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-2)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-objects {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-5)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-smileys_people {
+      background-position-x: 0
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-symbols {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-6)
+    }
+
+    .EmojiPickerReact button.epr-cat-btn.epr-icn-travel_places {
+      background-position-x: calc(var(--epr-category-navigation-button-size)*-3)
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-header .epr-header-overlay {
+      padding: var(--epr-header-padding);
+      z-index: var(--epr-header-overlay-z-index)
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact .epr-search-container {
+      display: block;
+      flex: 1;
+      min-width: 0
+    }
+
+    .EmojiPickerReact .epr-search-container input.epr-search {
+      background-color: var(--epr-search-input-bg-color);
+      border: 1px solid var(--epr-search-input-bg-color);
+      border-radius: var(--epr-search-input-border-radius);
+      color: var(--epr-search-input-text-color);
+      height: var(--epr-search-input-height);
+      outline: none;
+      padding: var(--epr-search-input-padding);
+      transition: all .2s ease-in-out;
+      width: 100%
+    }
+
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search .epr-icn-clear-search {
+      background-color: transparent;
+      background-image: url("");
+      background-repeat: no-repeat;
+      background-size: 20px;
+      height: 20px;
+      width: 20px
+    }
+
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search {
+      align-items: center;
+      border-radius: 50%;
+      display: flex;
+      height: 30px;
+      justify-content: center;
+      padding: 0;
+      position: absolute;
+      right: var(--epr-search-bar-inner-padding);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px
+    }
+
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search:focus .epr-icn-clear-search,
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search:hover .epr-icn-clear-search {
+      background-position-y: -20px
+    }
+
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search:focus,
+    .EmojiPickerReact .epr-search-container button.epr-btn-clear-search:hover {
+      background: var(--epr-hover-bg-color)
+    }
+
+    .EmojiPickerReact..epr-dark-theme .epr-search-container button.epr-btn-clear-search .epr-icn-clear-search {
+      background-position-y: -40px
+    }
+
+    .EmojiPickerReact..epr-dark-theme .epr-search-container button.epr-btn-clear-search:hover .epr-icn-clear-search {
+      background-position-y: -60px
+    }
+
+    .EmojiPickerReact .epr-search-container .epr-icn-search {
+      background-image: url("");
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: 20px;
+      content: "";
+      height: 20px;
+      left: var(--epr-search-bar-inner-padding);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px
+    }
+
+    .EmojiPickerReact.epr-dark-theme .epr-search-container .epr-icn-search {
+      background-position-y: -20px
+    }
+
+    .EmojiPickerReact .epr-search-container input.epr-search::-moz-placeholder {
+      color: var(--epr-search-input-placeholder-color)
+    }
+
+    .EmojiPickerReact .epr-search-container input.epr-search::placeholder {
+      color: var(--epr-search-input-placeholder-color)
+    }
+
+    .EmojiPickerReact .epr-search-container input.epr-search:focus {
+      background-color: var(--epr-search-input-bg-color-active);
+      border: 1px solid var(--epr-search-border-color)
+    }
+  </style>
+  <style type="text/css">
+    aside.EmojiPickerReact.epr-main {
+      border-color: var(--epr-picker-border-color);
+      border-radius: var(--epr-picker-border-radius);
+      border-style: solid;
+      border-width: 1px;
+      display: flex;
+      flex-direction: column;
+      position: relative
+    }
+  </style>
+  <style type="text/css">
+    .EmojiPickerReact {
+      --epr-highlight-color: #007aeb;
+      --epr-hover-bg-color: #f1f8ff;
+      --epr-focus-bg-color: #e0f0ff;
+      --epr-text-color: #858585;
+      --epr-search-input-bg-color: #f6f6f6;
+      --epr-picker-border-color: #e7e7e7;
+      --epr-bg-color: #fff;
+      --epr-category-icon-active-color: #6aa8de;
+      --epr-skin-tone-picker-menu-color: #ffffff95;
+      --epr-horizontal-padding: 10px;
+      --epr-picker-border-radius: 8px;
+      --epr-search-border-color: var(--epr-highlight-color);
+      --epr-header-padding: 15px var(--epr-horizontal-padding);
+      --epr-active-skin-tone-indicator-border-color: var(--epr-highlight-color);
+      --epr-active-skin-hover-color: var(--epr-hover-bg-color);
+      --epr-search-input-bg-color-active: var(--epr-search-input-bg-color);
+      --epr-search-input-padding: 0 30px;
+      --epr-search-input-border-radius: 8px;
+      --epr-search-input-height: 40px;
+      --epr-search-input-text-color: var(--epr-text-color);
+      --epr-search-input-placeholder-color: var(--epr-text-color);
+      --epr-search-bar-inner-padding: var(--epr-horizontal-padding);
+      --epr-category-navigation-button-size: 30px;
+      --epr-emoji-variation-picker-height: 45px;
+      --epr-emoji-variation-picker-bg-color: var(--epr-bg-color);
+      --epr-preview-height: 70px;
+      --epr-preview-text-size: 14px;
+      --epr-preview-text-padding: 0 var(--epr-horizontal-padding);
+      --epr-preview-border-color: var(--epr-picker-border-color);
+      --epr-preview-text-color: var(--epr-text-color);
+      --epr-category-padding: 0 var(--epr-horizontal-padding);
+      --epr-category-label-bg-color: #ffffffe6;
+      --epr-category-label-text-color: var(--epr-text-color);
+      --epr-category-label-padding: 0 var(--epr-horizontal-padding);
+      --epr-category-label-height: 40px;
+      --epr-emoji-size: 30px;
+      --epr-emoji-padding: 5px;
+      --epr-emoji-fullsize: calc(var(--epr-emoji-size) + var(--epr-emoji-padding)*2);
+      --epr-emoji-hover-color: var(--epr-hover-bg-color);
+      --epr-emoji-variation-indicator-color: var(--epr-picker-border-color);
+      --epr-emoji-variation-indicator-color-hover: var(--epr-text-color);
+      --epr-header-overlay-z-index: 3;
+      --epr-emoji-variations-indictator-z-index: 1;
+      --epr-category-label-z-index: 2;
+      --epr-skin-variation-picker-z-index: 5;
+      --epr-preview-z-index: 6
+    }
+
+    .EmojiPickerReact.epr-dark-theme {
+      --epr-dark: #000;
+      --epr-emoji-variation-picker-bg-color: var(--epr-dark);
+      --epr-highlight-color: silver;
+      --epr-text-color: var(--epr-highlight-color);
+      --epr-hover-bg-color: #363636f6;
+      --epr-focus-bg-color: #474747;
+      --epr-search-input-bg-color: #333;
+      --epr-category-label-bg-color: #222222e6;
+      --epr-picker-border-color: #151617;
+      --epr-bg-color: #222;
+      --epr-search-input-bg-color-active: var(--epr-dark);
+      --epr-emoji-variation-indicator-color: #444;
+      --epr-category-icon-active-color: #3271b7;
+      --epr-skin-tone-picker-menu-color: #22222295
+    }
+
+    .EmojiPickerReact {
+      background-color: var(--epr-bg-color);
+      overflow: hidden
+    }
+
+    .EmojiPickerReact .epr-hidden,
+    .EmojiPickerReact.epr-search-active .epr-hidden-on-search,
+    .EmojiPickerReact:not(.epr-search-active) .epr-visible-on-search-only {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:-moz-placeholder-shown)) .epr-hidden-on-search {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:not(:placeholder-shown)) .epr-hidden-on-search {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:-moz-placeholder-shown) .epr-visible-on-search-only {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important
+    }
+
+    aside.EmojiPickerReact.epr-main:has(input:placeholder-shown) .epr-visible-on-search-only {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      visibility: hidden !important
+    }
+
+    .EmojiPickerReact * {
+      box-sizing: border-box;
+      font-family: sans-serif
+    }
+
+    .EmojiPickerReact button.epr-btn {
+      background: none;
+      border: 0;
+      cursor: pointer;
+      outline: none
+    }
+  </style>
+  <meta name="react-scroll-to-bottom:version" content="4.2.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" data-react-helmet="true">
+  <meta http-equiv="Pragma" content="no-cache" data-react-helmet="true">
+  <meta http-equiv="Expires" content="0" data-react-helmet="true">
+  <style data-emotion="react-scroll-to-bottom--css-wdsqw" data-s="">
+    .react-scroll-to-bottom--css-wdsqw-79elbk {
+      position: relative;
+    }
+
+    .react-scroll-to-bottom--css-wdsqw-1n7m0yu {
+      height: 100%;
+      overflow-y: auto;
+      width: 100%;
+    }
+
+    .react-scroll-to-bottom--css-wdsqw-1tj0vk3 {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      border-width: 0px;
+      bottom: 5px;
+      cursor: pointer;
+      height: 20px;
+      outline: 0px;
+      position: absolute;
+      right: 20px;
+      width: 20px;
+    }
+
+    .react-scroll-to-bottom--css-wdsqw-1tj0vk3:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .react-scroll-to-bottom--css-wdsqw-1tj0vk3:active {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+
+<body style="overflow-y: auto;">
+  <div class="qc-cmp2-container" id="qc-cmp2-container" data-nosnippet=""><a class="qc-cmp2-persistent-link"
+      id="qc-cmp2-persistent-link" data-nosnippet="" tabindex="0" href="#"><img data-nosnippet=""
+        src="40ce4dcd36d553d3018c1cc26dceb221ee3f456f.svg" alt="Privacy">Privacy</a></div><noscript>You need to enable
+    JavaScript to run this app.</noscript>
+  <div id="modal-root">
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-3 md:py-3 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[50%]">
+        <div class="mb-4">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-1" style="line-height: 1.4;">Welcome Back</h1>
+          <p class="text-sm">We knew you’d come around, sign in for endless entertainment</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-3 mb-3 sm:grid-cols-2"><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="metamask.svg" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">Metamask</p>
+            </div>
+          </button><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="space_id_logo.png" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">.bnb Domain</p>
+            </div>
+          </button><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="ens-logo.png" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">.ens Domain</p>
+            </div>
+          </button><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="bitgret_logo.png" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">Bitgert</p>
+            </div>
+          </button><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="temple-wallet.png" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">Temple Wallet</p>
+            </div>
+          </button><button
+            class="w-full bg-[#131313] py-0 md:py-4 h-[50px] md:h-auto flex flex-col sm:flex-col items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-center rounded-lg px-6">
+            <div class="flex flex-col sm:flex-col items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                src="okc_logo.png" class="w-[26px]" alt="">
+              <p class="text-sm md:pt-3" style="margin-left: 0px;">OKT Chain</p>
+            </div>
+          </button></div>
+        <hr style="color: rgb(153, 153, 153);">
+        <div class="my-4">
+          <div class="mb-2 mt-4"><button
+              class="w-full bg-[#131313] py-5 sm:py-0 sm:h-[50px] flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-between rounded-lg px-6">
+              <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                  src="google-logo.png" class="w-[26px]" alt="">
+                <p class="text-sm">Continue with Google</p>
+              </div>
+              <div class="flex items-center space-x-3"></div>
+            </button></div>
+          <div class="my-4"><button
+              class="w-full bg-[#131313] py-5 sm:py-0 sm:h-[50px] flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 justify-between rounded-lg px-6">
+              <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4"><img
+                  src="email.png" class="w-[26px]" alt="">
+                <p class="text-sm">Sign in via Email Address</p>
+              </div>
+              <div class="flex items-center space-x-3"></div>
+            </button>
+            <p class="block w-fit mx-auto text-center text-sm cursor-pointer mt-4">Sign up via Email Address</p>
+          </div>
+        </div>
+      </div><img src="connect-wallet-banner.png"
+        class="w-full lg:w-auto mt-10 lg:mt-0 max-w-[26rem] lg:max-w-none mx-auto lg:h-full object-cover lg:absolute top-0 right-0 z-[100]"
+        alt=""><button class="absolute top-8 right-10 text-lg text-white flex z-[500000]"><svg
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+          class="iconify iconify--maki" width="1em" height="1em" viewBox="0 0 15 15">
+          <path fill="currentColor"
+            d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+          </path>
+        </svg></button>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[50%]">
+        <div class="mb-8">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-3" style="line-height: 1.4;">Sign Up</h1>
+          <p class="text-sm">We knew you’d come around, sign up for endless entertainment</p>
+        </div>
+        <div class="grid grid-cols-1 gap-4 mb-7">
+          <form>
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-x-6 gap-y-6 mb-6">
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="username" placeholder="Username"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                      value=""></div>
+                </div>
+              </div>
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="email" placeholder="Email"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                      value=""></div>
+                </div>
+              </div>
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label for="refral"
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="refral" type="text" id="refral" placeholder="Referral code "
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                      value=""></div>
+                </div>
+              </div>
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label for="newPassword"
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="password" type="password" id="newPassword"
+                      placeholder="Enter password"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"><button
+                      type="button"
+                      class="absolute top-1/3 -translate-y-1/2 right-5 flex opacity-60 z-20 text-base md:text-xl"><svg
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                        role="img" class="iconify iconify--ion" width="1em" height="1em" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                          d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z">
+                        </path>
+                        <path fill="currentColor"
+                          d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z">
+                        </path>
+                      </svg></button></div>
+                </div>
+              </div>
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label for="confirm_password"
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="confirm_password" type="password" id="confirm_password"
+                      placeholder="Repeat your password"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"><button
+                      type="button"
+                      class="absolute top-1/3 -translate-y-1/2 right-5 flex opacity-60 z-20 text-base md:text-xl"><svg
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                        role="img" class="iconify iconify--ion" width="1em" height="1em" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                          d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z">
+                        </path>
+                        <path fill="currentColor"
+                          d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z">
+                        </path>
+                      </svg></button></div>
+                </div>
+              </div>
+              <div>
+                <div>
+                  <div>
+                    <div style="width: 304px; height: 78px;">
+                      <div><iframe title="reCAPTCHA" src="index_4.html" width="304" height="78" role="presentation"
+                          name="a-51tbb14vofm9" frameborder="0" scrolling="no"
+                          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                      </div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response"
+                        style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><button type="submit"
+              class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-3 px-6 xl:px-8 rounded-lg font-semibold undefined text-darkGray bg-primary "><span
+                class="text-inherit lh-1">Save Changes</span></button>
+          </form>
+        </div><img src="connect-wallet-banner.png"
+          class="w-full lg:w-auto mt-10 lg:mt-0 max-w-[26rem] lg:max-w-none mx-auto lg:h-full object-cover lg:absolute top-0 right-0 z-[100]"
+          alt=""><button class="absolute top-8 right-10 text-lg text-white flex z-[500000]"><svg
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+            class="iconify iconify--maki" width="1em" height="1em" viewBox="0 0 15 15">
+            <path fill="currentColor"
+              d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+            </path>
+          </svg></button>
+      </div>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[50%]">
+        <div class="mb-8">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-3" style="line-height: 1.4;">Sign In</h1>
+          <p class="text-sm">We knew you’d come around, sign in for endless entertainment</p>
+        </div>
+        <div class="grid grid-cols-1 gap-4 mb-7">
+          <form>
+            <div class="grid grid-cols-1 sm:grid-cols-1 gap-x-6 gap-y-6 mb-6">
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="email" placeholder="Email"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                      value=""></div>
+                </div>
+              </div>
+              <div>
+                <div class="relative text-sm lg:text-base space-y-1"><label for="newPassword"
+                    class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+                  <div class="relative"><input name="password" type="password" id="newPassword"
+                      placeholder="Enter password"
+                      class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"><button
+                      type="button"
+                      class="absolute top-1/3 -translate-y-1/2 right-5 flex opacity-60 z-20 text-base md:text-xl"><svg
+                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                        role="img" class="iconify iconify--ion" width="1em" height="1em" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                          d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z">
+                        </path>
+                        <path fill="currentColor"
+                          d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z">
+                        </path>
+                      </svg></button></div>
+                </div>
+              </div>
+            </div><button type="submit"
+              class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-3 px-6 xl:px-8 rounded-lg font-semibold undefined text-darkGray bg-primary "><span
+                class="text-inherit lh-1">Login</span></button>
+          </form>
+        </div><img src="connect-wallet-banner.png"
+          class="w-full lg:w-auto mt-10 lg:mt-0 max-w-[26rem] lg:max-w-none mx-auto lg:h-full object-cover lg:absolute top-0 right-0 z-[100]"
+          alt=""><button class="absolute top-8 right-10 text-lg text-white flex z-[500000]"><svg
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+            class="iconify iconify--maki" width="1em" height="1em" viewBox="0 0 15 15">
+            <path fill="currentColor"
+              d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+            </path>
+          </svg></button>
+      </div>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <h2 class="text-center text-4xl py-10">My Reward History</h2>
+      <div class="bg-[#161616] container rounded-xl">
+        <table class="stake-nodes-table evenBg text-left rounded-lg w-full">
+          <thead>
+            <tr>
+              <th class="text-[#ffef00] py-4">Reward Type</th>
+              <th class="text-[#ffef00] py-4">Reward Point</th>
+              <th class="text-[#ffef00] py-4">Earned At</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="container py-10">
+        <div class="py-2">
+          <div class="flex justify-end">
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination"><a href="#"
+                class="page-disabled relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><span
+                  class="text-black">Previous</span></a><a href="#"
+                class="page-disabled relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><span
+                  class="text-black">Next</span></a></nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <h2 class="text-center mb-3">Glasses</h2>
+      <div class="max-h-96 overflow-auto">
+        <div class="infinite-scroll-component__outerdiv">
+          <div class="infinite-scroll-component " style="height: 350px; overflow: auto;">
+            <div class="flex justify-center items-center h-[100%]">
+              <p class="text-xl">No Glass Found</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#131313] w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-3 md:py-5 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="">
+        <div class="mb-8 flex justify-between">
+          <p class=" text-lg mb-3"></p><a class="text-lg ">×</a>
+        </div>
+        <div class="flex justify-center mb-7 h-[300px]"><img class="object-fill" alt=""></div>
+        <div>
+          <p class=" text-lg "></p>
+          <p class="text-sm"> min</p>
+          <p class="text-sm mb-3"></p><button type="submit"
+            class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-3 px-6 xl:px-8 rounded-lg font-semibold text-lg btn-primary text-white flex z-[500000] text-darkGray bg-primary "><span
+              class="text-inherit lh-1">Watch live</span></button>
+        </div>
+      </div>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[50%] mx-auto">
+        <div class="mb-8">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-3" style="line-height: 1.4;">You are almost there
+          </h1>
+          <p class="text-sm">Complete these fields with your email and nickname</p>
+        </div>
+        <form>
+          <div class="space-y-6 mb-10">
+            <div class="relative text-sm lg:text-base space-y-1"><label for="email"
+                class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer">E-mail address</label>
+              <div class="relative"><input name="email" type="email" id="email" placeholder="Enter your email address"
+                  class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                  value=""></div>
+            </div>
+            <div class="relative text-sm lg:text-base space-y-1"><label for="nickname"
+                class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+              <div class="relative"><input name="nickname" type="text" id="nickname" placeholder="NickName"
+                  class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                  value=""></div>
+            </div>
+            <div class="relative text-sm lg:text-base space-y-1"><label for="refral"
+                class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+              <div class="relative"><input name="refral" type="text" id="refral" placeholder="Referral code "
+                  class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"
+                  value=""></div>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div class="pt-2"><button type="submit"
+                class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-3 px-6 xl:px-8 rounded-lg font-semibold undefined text-darkGray bg-primary "><span
+                  class="text-inherit lh-1">Continue</span></button></div>
+          </div>
+        </form>
+      </div><button class="absolute top-8 right-10 text-lg text-white flex z-[500000]"><svg
+          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+          class="iconify iconify--maki" width="1em" height="1em" viewBox="0 0 15 15">
+          <path fill="currentColor"
+            d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+          </path>
+        </svg></button>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] max-w-[900px] h-[90vh] max-h-[600px] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-10 px-8 md:px-14 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[50%] mx-auto">
+        <div class="mb-8">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-3" style="line-height: 1.4;">Last step!</h1>
+          <p class="text-sm">Set your password to use it in the Script-tv</p>
+        </div>
+        <form>
+          <div class="space-y-6 mb-10">
+            <div class="relative text-sm lg:text-base space-y-1"><label for="newPassword"
+                class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+              <div class="relative"><input name="password" type="password" id="newPassword" placeholder="Enter password"
+                  class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"><button
+                  type="button"
+                  class="absolute top-1/3 -translate-y-1/2 right-5 flex opacity-60 z-20 text-base md:text-xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--ion" width="1em" height="1em" viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                      d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z">
+                    </path>
+                  </svg></button></div>
+            </div>
+            <div class="relative text-sm lg:text-base space-y-1"><label for="confirm_password"
+                class="transition-all -z-1 duration-300 text-primary block w-fit cursor-pointer"></label>
+              <div class="relative"><input name="confirm_password" type="password" id="confirm_password"
+                  placeholder="Repeat your password"
+                  class="block w-full appearance-none outline-none bg-transparent pb-2 border-b-2 border-primary"><button
+                  type="button"
+                  class="absolute top-1/3 -translate-y-1/2 right-5 flex opacity-60 z-20 text-base md:text-xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--ion" width="1em" height="1em" viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                      d="M432 448a15.92 15.92 0 0 1-11.31-4.69l-352-352a16 16 0 0 1 22.62-22.62l352 352A16 16 0 0 1 432 448ZM248 315.85l-51.79-51.79a2 2 0 0 0-3.39 1.69a64.11 64.11 0 0 0 53.49 53.49a2 2 0 0 0 1.69-3.39Zm16-119.7L315.87 248a2 2 0 0 0 3.4-1.69a64.13 64.13 0 0 0-53.55-53.55a2 2 0 0 0-1.72 3.39Z">
+                    </path>
+                    <path fill="currentColor"
+                      d="M491 273.36a32.2 32.2 0 0 0-.1-34.76c-26.46-40.92-60.79-75.68-99.27-100.53C349 110.55 302 96 255.68 96a226.54 226.54 0 0 0-71.82 11.79a4 4 0 0 0-1.56 6.63l47.24 47.24a4 4 0 0 0 3.82 1.05a96 96 0 0 1 116 116a4 4 0 0 0 1.05 3.81l67.95 68a4 4 0 0 0 5.4.24a343.81 343.81 0 0 0 67.24-77.4ZM256 352a96 96 0 0 1-93.3-118.63a4 4 0 0 0-1.05-3.81l-66.84-66.87a4 4 0 0 0-5.41-.23c-24.39 20.81-47 46.13-67.67 75.72a31.92 31.92 0 0 0-.64 35.54c26.41 41.33 60.39 76.14 98.28 100.65C162.06 402 207.92 416 255.68 416a238.22 238.22 0 0 0 72.64-11.55a4 4 0 0 0 1.61-6.64l-47.47-47.46a4 4 0 0 0-3.81-1.05A96 96 0 0 1 256 352Z">
+                    </path>
+                  </svg></button></div>
+            </div>
+          </div>
+          <div class="space-y-6 mb-10">
+            <div>
+              <div>
+                <div style="width: 304px; height: 78px;">
+                  <div><iframe title="reCAPTCHA" src="index_3.html" width="304" height="78" role="presentation"
+                      name="a-8kyef0bkzlz5" frameborder="0" scrolling="no"
+                      sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe>
+                  </div><textarea id="g-recaptcha-response-1" name="g-recaptcha-response" class="g-recaptcha-response"
+                    style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea>
+                </div><iframe style="display: none;" src="index_1.html"></iframe>
+              </div>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div class="pt-2"><button type="submit"
+                class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-3 px-6 xl:px-8 rounded-lg font-semibold undefined text-darkGray bg-primary "><span
+                  class="text-inherit lh-1">Save</span></button></div>
+          </div>
+        </form>
+      </div>
+    </section>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <section
+      class="max-w-[500px] fixed left-1/2 -translate-x-1/2 -translate-y-1/2 bg-black w-[90%] z-[10000000] overflow-x-hidden overflow-y-auto rounded-xl md:rounded-3xl py-6 md:py-5 px-2 md:px-5 hide-scrollbar transition-all duration-300 shadow-sm shadow-primary opacity-0 pointer-events-none top-[40%]">
+      <div class="lg:w-[80%] mx-auto">
+        <div class="mb-5">
+          <h1 class="text-xl lg:text-2xl xl:text-3xl font-medium mb-3" style="line-height: 1.4;">Metamask Change Detect!
+          </h1>
+          <p class="text-sm">Wallet address has been changed. Do you want to login with current wallet ?</p>
+          <div class="flex gap-5"><button
+              class="bg-primary text-black w-full rounded-xl py-2.5 mt-5">Yes</button><button
+              class="bg-primary text-black w-full rounded-xl py-2.5 mt-5">No</button></div>
+        </div>
+      </div>
+    </section>
+    <div class="container py-5 xl:py-7 flex items-center justify-between z-[200] relative"><a href=""><img
+          src="logo-beta.svg" class="w-[100px] xl:w-[144px]" alt=""></a>
+      <div><button class="block lg:hidden text-2xl"><svg xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--charm"
+            width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+              d="M2.75 12.25h10.5m-10.5-4h10.5m-10.5-4h10.5"></path>
+          </svg></button>
+        <div
+          class="p-12 lg:p-0 flex flex-col lg:flex-row lg:items-center lg:space-x-10 xl:space-x-10 fixed lg:static top-0 right-0 w-[300px] lg:w-auto h-full border-l-2 border-primary lg:border-none transition-all duration-300 bg-black lg:bg-transparent z-[110] overflow-y-auto lg:overflow-y-visible translate-x-[300px] lg:translate-x-0">
+          <div class="flex items-center justify-between lg:hidden mb-10"><img src="logo-beta.svg"
+              class="w-[60%] cursor-pointer block lg:hidden" alt=""><button class="flex text-lg"><svg
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                role="img" class="iconify iconify--maki" width="1em" height="1em" viewBox="0 0 15 15">
+                <path fill="currentColor"
+                  d="M3.64 2.27L7.5 6.13l3.84-3.84A.92.92 0 0 1 12 2a1 1 0 0 1 1 1a.9.9 0 0 1-.27.66L8.84 7.5l3.89 3.89A.9.9 0 0 1 13 12a1 1 0 0 1-1 1a.92.92 0 0 1-.69-.27L7.5 8.87l-3.85 3.85A.92.92 0 0 1 3 13a1 1 0 0 1-1-1a.9.9 0 0 1 .27-.66L6.16 7.5L2.27 3.61A.9.9 0 0 1 2 3a1 1 0 0 1 1-1c.24.003.47.1.64.27Z">
+                </path>
+              </svg></button></div>
+          <div class="flex flex-col lg:flex-row lg:items-center space-y-5 lg:space-y-0 lg:space-x-6 xl:space-x-6"><a
+              class="nav-link text-sm xl:text-base font-medium cursor-pointer" href="">Token</a><a
+              class="nav-link text-sm xl:text-base font-medium cursor-pointer" href="https://script.tv/watch">Watch</a>
+            <div class="group/dropdown flex items-center justify-between space-x-2 relative">
+              <p
+                class="group-hover/dropdown:text-primary group-hover/dropdown:underline transition-all duration-300 cursor-pointer text-sm xl:text-base font-medium">
+                Channels</p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true" role="img"
+                class="text-base transition-all duration-300 group-hover/dropdown:opacity-0 iconify iconify--akar-icons"
+                width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m4 9l8 8l8-8"></path>
+              </svg>
+              <div
+                class="w-[600px] absolute left-1/2 -translate-x-1/2 top-full pt-6 transition-all duration-300 translate-y-8 opacity-0 pointer-events-none group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 group-hover/dropdown:pointer-events-auto z-[100]">
+                <div class="bg-blue-3 rounded-lg grid lg:grid-cols-3 lg:p-0 gap-6 lg:gap-0 py-4 lg:py-0 w-full">
+                  <div class="lg:py-7 px-5 lg:px-8 flex-col space-y-3 lg:space-y-5"><a
+                      class="flex items-center space-x-2 lg:space-x-3 w-full" href="https://script.tv/all-channels">
+                      <div
+                        class="w-[22px] lg:w-[34px] h-[22px] lg:h-[34px] flex items-center justify-center rounded bg-primary">
+                        <img src="channels.svg" class="w-[50%]" alt=""></div>
+                      <p class="text-xs lg:text-sm font-bold text-white">All Channels</p>
+                    </a><a class="flex items-center space-x-2 lg:space-x-3 w-full"
+                      href="https://script.tv/all-categories">
+                      <div
+                        class="w-[22px] lg:w-[34px] h-[22px] lg:h-[34px] flex items-center justify-center rounded bg-primary">
+                        <img src="all.svg" class="w-[50%]" alt=""></div>
+                      <p class="text-xs lg:text-sm font-bold text-white">All Categories</p>
+                    </a></div>
+                  <div
+                    class="py-4 lg:py-7 px-5 lg:px-8 border-t-1px lg:border-t-0 lg:border-l-1px border-primary w-full col-span-2">
+                    <p class="text-base font-bold mb-6 uppercase text-primary">Channels</p>
+                    <div class="grid grid-cols-2 gap-6 lg:gap-0 lg:flex flex-wrap items-center lg:-mx-3 lg:-my-3"><img
+                        src="1686649580791-SOFAST_logo-assets_1080x1080_EN-EN_black-removebg-preview.png" alt="abc"
+                        class="lg:mx-3 lg:my-3 w-full lg:w-20"><img src="1687260261375-edgy_urban_(1).png" alt="abc"
+                        class="lg:mx-3 lg:my-3 w-full lg:w-20"><img
+                        src="1686649119608-SOFAST_logo-assets_1080x1080_EN-ES_black-removebg-preview.png" alt="abc"
+                        class="lg:mx-3 lg:my-3 w-full lg:w-20"><img src="1687510335304-lol_tv.png" alt="abc"
+                        class="lg:mx-3 lg:my-3 w-full lg:w-20"><img
+                        src="1687509996086-weshort_horizontal_no-payoff_white-logo[1].png" alt="abc"
+                        class="lg:mx-3 lg:my-3 w-full lg:w-20"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="group/dropdown flex items-center justify-between space-x-2 relative">
+              <p
+                class="group-hover/dropdown:text-primary group-hover/dropdown:underline transition-all duration-300 cursor-pointer text-sm xl:text-base font-medium">
+                Help</p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                aria-hidden="true" role="img"
+                class="text-base transition-all duration-300 group-hover/dropdown:opacity-0 iconify iconify--akar-icons"
+                width="1em" height="1em" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m4 9l8 8l8-8"></path>
+              </svg>
+              <div
+                class="w-[680px] absolute left-1/2 -translate-x-1/2 top-full pt-6 transition-all duration-300 translate-y-8 opacity-0 pointer-events-none group-hover/dropdown:opacity-100 group-hover/dropdown:translate-y-0 group-hover/dropdown:pointer-events-auto z-[100]">
+                <div class="bg-blue-3 rounded-lg grid lg:grid-cols-[230px,1fr]">
+                  <div class="pt-4 pb-6 lg:py-6 px-4 lg:px-7 flex-col">
+                    <p class="text-base font-bold mb-4">About</p>
+                    <div class="bg-[#1F1F1F] rounded-xl py-4 px-5">
+                      <div class="space-y-2"><a href="https://whitepaper.script.tv/" rel="noreferrer" target="_blank"
+                          class="text-sm font-medium">Whitepaper</a> <br><a class="text-sm font-medium"
+                          href="https://token.script.tv/research">Script TV explained</a> <br><a
+                          class="text-sm font-medium" href="https://token.script.tv/">Blog</a> <br><a
+                          class="text-sm font-medium" href="https://token.script.tv/faq">FAQ</a></div>
+                    </div>
+                  </div>
+                  <div
+                    class="grid lg:grid-cols-2 gap-6 py-5 lg:py-7 px-4 lg:px-8 border-t-1px lg:border-t-0 lg:border-l-1px border-primary">
+                    <div>
+                      <p class="text-base font-bold mb-4">Learn More</p><a class="block"
+                        href="https://token.script.tv/research"><img src="learn-more.png"
+                          class="rounded-md w-full mb-2 aspect-video object-cover" alt="">
+                        <p class="text-sm font-medium">More on Script TV</p>
+                      </a>
+                    </div>
+                    <div>
+                      <p class="text-base font-bold mb-4">Latest Post</p><a class="block" href=""><img
+                          src="latest-post.png" class="rounded-md w-full mb-2 aspect-video object-cover" alt="">
+                        <p class="text-sm font-medium">Developer Diary</p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><a class="nav-link text-sm xl:text-base font-medium cursor-pointer" href="">Community</a><a
+              href="https://wallet.script.tv/" target="_blank" rel="noreferrer"
+              class="nav-link text-sm xl:text-base font-medium cursor-pointer">Wallet</a><a
+              href="https://explorer.script.tv/" target="_blank" rel="noreferrer"
+              class="nav-link text-sm xl:text-base font-medium cursor-pointer">Explorer</a>
+          </div>
+          <div class="flex flex-col lg:flex-row lg:items-center space-y-3 lg:space-y-0 lg:space-x-4"><a
+              class="flex items-center text-xs sm:text-sm xl:text-base min-h-[30px] xl:min-h-[32px] space-x-3 px-5 rounded-lg font-semibold mt-8 lg:mt-0 flex justify-center text-darkGray bg-primary"
+              href="https://token.script.tv/marketplace"><span class="text-inherit lh-1"><span
+                  class="text-xs xl:text-sm text-black">MarketPlace</span></span></a><button type="button"
+              class="flex items-center text-xs sm:text-sm xl:text-base min-h-[30px] xl:min-h-[32px] space-x-3 px-5 rounded-lg font-semibold mt-8 lg:mt-0 flex justify-center text-center text-darkGray bg-primary "><span
+                class="text-inherit lh-1"><span class="text-xs xl:text-sm text-black">Sign in / Sign
+                  up</span></span></button></div>
+        </div>
+      </div>
+      <div class="black-screen "></div>
+    </div>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+    <div class="black-screen " style="z-index: 1000000;"></div>
+  </div>
+  <div id="root">
+    <div>
+      <div class="mb-4 sm:mb-6 relative z-50"></div>
+      <div class="mb-8">
+        <div>
+          <div class="container grid md:grid-cols-[1fr_300px] xl:grid-cols-[1fr_356px] gap-6 sm:gap-8">
+            <div class="relative min-w-full">
+              <div
+                class="swiper swiper-initialized swiper-horizontal swiper-pointer-events rounded-xl overflow-hidden h-[auto] md:h-full swiper-backface-hidden">
+                <div class="swiper-wrapper"
+                  style="transform: translate3d(-3712px, 0px, 0px); transition-duration: 0ms;">
+                  <div class="swiper-slide swiper-slide-duplicate swiper-slide-duplicate-next"
+                    data-swiper-slide-index="4" style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><a
+                        href="https://crew3.xyz/c/scriptnetwork/questboard" target="_blank"><img
+                          src="collect-points.png" class="w-full md:h-full" alt=""></a></div>
+                  </div>
+                  <div class="swiper-slide" data-swiper-slide-index="0" style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><a
+                        href="https://medium.com/script-network/glasspass-rewards-reveal-airdrop-ad-revenue-profit-sharing-and-minting-information-319a8dc82a31"
+                        target="_blank"><img src="glasspass-reward.png" class="w-full md:h-full" alt=""></a></div>
+                  </div>
+                  <div class="swiper-slide" data-swiper-slide-index="1" style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><img src="glass-pass.png"
+                        class="w-full md:h-full" alt=""></div>
+                  </div>
+                  <div class="swiper-slide swiper-slide-prev" data-swiper-slide-index="2"
+                    style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><img
+                        src="community-ama.png" class="w-full md:h-full" alt=""></div>
+                  </div>
+                  <div class="swiper-slide swiper-slide-active" data-swiper-slide-index="3"
+                    style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><a
+                        href="https://t.co/U49MOxQKKN" target="_blank"><img src="sag.png" class="w-full md:h-full"
+                          alt=""></a></div>
+                  </div>
+                  <div class="swiper-slide swiper-slide-next" data-swiper-slide-index="4"
+                    style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><a
+                        href="https://crew3.xyz/c/scriptnetwork/questboard" target="_blank"><img
+                          src="collect-points.png" class="w-full md:h-full" alt=""></a></div>
+                  </div>
+                  <div class="swiper-slide swiper-slide-duplicate" data-swiper-slide-index="0"
+                    style="width: 898px; margin-right: 30px;">
+                    <div class="h-[auto] md:h-full relative z-10 rounded-xl overflow-hidden"><a
+                        href="https://medium.com/script-network/glasspass-rewards-reveal-airdrop-ad-revenue-profit-sharing-and-minting-information-319a8dc82a31"
+                        target="_blank"><img src="glasspass-reward.png" class="w-full md:h-full" alt=""></a></div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute bottom-6 right-8 z-50 rounded-full overflow-hidden flex items-center"><button
+                  class="min-w-[22px] group/navigator h-5 flex items-center justify-end text-sm text-black bg-white"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="invert group-disabled/navigator:opacity-30 iconify iconify--material-symbols"
+                    width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m9.55 12l7.35 7.35q.375.375.363.875t-.388.875q-.375.375-.875.375t-.875-.375l-7.7-7.675q-.3-.3-.45-.675t-.15-.75q0-.375.15-.75t.45-.675l7.7-7.7q.375-.375.888-.363t.887.388q.375.375.375.875t-.375.875L9.55 12Z">
+                    </path>
+                  </svg></button><button
+                  class="min-w-[22px] h-5 flex group/navigator items-center justify-start text-sm text-black bg-white"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="invert group-disabled/navigator:opacity-30 iconify iconify--material-symbols"
+                    width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887q.375-.375.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75q0 .375-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1q-.375-.375-.375-.888t.375-.887L14.475 12Z">
+                    </path>
+                  </svg></button></div>
+              <div
+                class="bullet-pagination z-40 space-x-2 absolute bottom-7 left-0 w-full flex items-center justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
+                <span classname="people-slider-bullet"></span><span classname="people-slider-bullet"></span><span
+                  classname="people-slider-bullet"></span><span classname="people-slider-bullet"></span><span
+                  classname="people-slider-bullet"></span></div>
+            </div>
+            <div class="bg-[#0D0D0D] py-6 rounded-xl">
+              <p class="fs-20px font-semibold mb-4 px-6">Your Mini Dashboard</p>
+              <div class="space-y-4">
+                <div class="px-6">
+                  <p class="mb-1 text-xs xl:text-sm font-medium opacity-60">Minutes watched in total (as of yesterday)
+                  </p>
+                  <p class="text-sm xl:text-base font-bold">N/A</p>
+                </div>
+                <div class="w-full h-[1px] bg-[#202020]"></div>
+                <div class="px-6">
+                  <p class="mb-1 text-xs xl:text-sm font-medium opacity-60">Minutes watched yesterday</p>
+                  <p class="text-sm xl:text-base font-bold">N/A</p>
+                </div>
+                <div class="w-full h-[1px] bg-[#202020]"></div>
+                <div class="px-6 flex items-center justify-between space-x-6">
+                  <p class="undefined text-xs xl:text-sm font-medium opacity-60">Most watched channel:</p>
+                  <div>N/A</div>
+                </div>
+                <div class="w-full h-[1px] bg-[#202020]"></div>
+                <div class="px-6 flex items-center space-x-4 justify-between">
+                  <div>
+                    <p class="text-sm xl:text-base font-medium">N/A</p>
+                    <p class="undefined text-xs xl:text-sm font-medium opacity-60">Favourite Glasses</p>
+                  </div><img src="green-glasses.png" class="w-[60px] xl:w-[80px]" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-6">
+        <section class="relative">
+          <div class="container mb-8">
+            <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 items-center sm:space-x-5"><img src="fire.svg"
+                class="w-[26px]" alt="">
+              <h1 class="text-base lg:text-lg xl:text-2xl font-medium text-center sm:text-left"
+                style="line-height: 1.4;">Decentralized television,<span class="text-primary"> for free</span></h1>
+            </div>
+          </div>
+          <div class="bg-shade-darkest-blue md:py-4 sm:bg-transparent sm:py-0">
+            <div class="container">
+              <div
+                class="sm:bg-shade-darkest-blue grid gap-8 sm:gap-3 lg:gap-10 lg:pr-10 rounded-lg overflow-hidden lg:grid-cols-[1fr_340px] xl:grid-cols-[1fr_420px]">
+                <div id="chatWrapper" class="sm:py-5 sm:px-8 lg:px-0">
+                  <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center space-x-2">
+                      <p class="text-sm font-medium hidden">0.0000</p>
+                    </div>
+                    <div class="flex items-center space-x-4"><button class="text-2xl"><svg
+                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                          aria-hidden="true" role="img" class="rotate-180 iconify iconify--material-symbols" width="1em"
+                          height="1em" viewBox="0 0 24 24">
+                          <path fill="currentColor"
+                            d="M16.15 13H5q-.425 0-.713-.288T4 12q0-.425.288-.713T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.313t.712.288L19.3 11.3q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7L16.15 13Z">
+                          </path>
+                        </svg></button><button class="text-xl"><svg xmlns="http://www.w3.org/2000/svg"
+                          xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                          class="iconify iconify--ep" width="1em" height="1em" viewBox="0 0 1024 1024">
+                          <path fill="currentColor"
+                            d="M600.704 64a32 32 0 0 1 30.464 22.208l35.2 109.376c14.784 7.232 28.928 15.36 42.432 24.512l112.384-24.192a32 32 0 0 1 34.432 15.36L944.32 364.8a32 32 0 0 1-4.032 37.504l-77.12 85.12a357.12 357.12 0 0 1 0 49.024l77.12 85.248a32 32 0 0 1 4.032 37.504l-88.704 153.6a32 32 0 0 1-34.432 15.296L708.8 803.904c-13.44 9.088-27.648 17.28-42.368 24.512l-35.264 109.376A32 32 0 0 1 600.704 960H423.296a32 32 0 0 1-30.464-22.208L357.696 828.48a351.616 351.616 0 0 1-42.56-24.64l-112.32 24.256a32 32 0 0 1-34.432-15.36L79.68 659.2a32 32 0 0 1 4.032-37.504l77.12-85.248a357.12 357.12 0 0 1 0-48.896l-77.12-85.248A32 32 0 0 1 79.68 364.8l88.704-153.6a32 32 0 0 1 34.432-15.296l112.32 24.256c13.568-9.152 27.776-17.408 42.56-24.64l35.2-109.312A32 32 0 0 1 423.232 64H600.64zm-23.424 64H446.72l-36.352 113.088l-24.512 11.968a294.113 294.113 0 0 0-34.816 20.096l-22.656 15.36l-116.224-25.088l-65.28 113.152l79.68 88.192l-1.92 27.136a293.12 293.12 0 0 0 0 40.192l1.92 27.136l-79.808 88.192l65.344 113.152l116.224-25.024l22.656 15.296a294.113 294.113 0 0 0 34.816 20.096l24.512 11.968L446.72 896h130.688l36.48-113.152l24.448-11.904a288.282 288.282 0 0 0 34.752-20.096l22.592-15.296l116.288 25.024l65.28-113.152l-79.744-88.192l1.92-27.136a293.12 293.12 0 0 0 0-40.256l-1.92-27.136l79.808-88.128l-65.344-113.152l-116.288 24.96l-22.592-15.232a287.616 287.616 0 0 0-34.752-20.096l-24.448-11.904L577.344 128zM512 320a192 192 0 1 1 0 384a192 192 0 0 1 0-384zm0 64a128 128 0 1 0 0 256a128 128 0 0 0 0-256z">
+                          </path>
+                        </svg></button></div>
+                  </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="mb-12" id="videoTag">
+        <section>
+          <div class="container">
+            <div class="mb-6">
+              <div class="grid lg:grid-cols-[1fr_340px] gap-10 items-center mb-2">
+                <div class="flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 justify-between">
+                  <div class="w-full flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 flex-1">
+                    <div class="grid grid-cols-[110px_110px] gap-6">
+                      <div class=""><img class="max-w-[108px] md:max-w-none md:w-full" alt=""
+                          src="1686649580791-SOFAST_logo-assets_1080x1080_EN-EN_black-removebg-preview.png"></div>
+                      <div class=""><button type="button"
+                          class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] space-x-2 border-2 border-green px-5 rounded-lg text-green justify-center flex w-full undefined  "><img
+                            src="green-heart.svg" class="w-[15px] lh-1" alt=""><span
+                            class="text-inherit lh-1">Follow</span></button></div>
+                    </div>
+                    <div class="flex-1 w-full">
+                      <div class="md:max-w-[300px] w-full text-center md:text-left">
+                        <p class="text-sm font-bold">Brussels, My Love ?</p>
+                        <p class="text-sm">From the economy to the climate and the EU's role in world affairs, this talk
+                          show sheds light on European affairs and the issues that impact on our daily lives as
+                          Europeans. Tune in to understand the ins and outs of European politics.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4"><a
+                    class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] bg-primary px-4 rounded-lg text-black font-semibold space-x-2 justify-center undefined "
+                    href="https://script.tv/dashboard"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="invert text-xl iconify iconify--mdi" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M13 3v6h8V3m-8 18h8V11h-8M3 21h8v-6H3m0-2h8V3H3v10Z"></path>
+                    </svg><span class="text-inherit lh-1">Dashboard</span></a><button type="button"
+                    class="flex items-center text-xs sm:text-sm xl:text-base min-h-[34px] xl:min-h-[38px] bg-green text-black px-6 rounded-lg font-semibold justify-center undefined  "><span
+                      class="text-inherit lh-1">JHEuHqLQ</span></button></div>
+              </div>
+              <div class="grid xl:grid-cols-[1fr_340px] gap-10 items-center">
+                <div class="xl:flex items-center space-y-12 xl:space-y-0 xl:space-x-6">
+                  <div class="grid grid-cols-2 xl:grid-cols-[110px_110px] gap-4 xl:gap-6"><button
+                      class="bg-primary flex-1 xl:flex-auto h-[70px] xl:h-[90px] py-4 px-5 rounded-lg justify-center flex flex-col items-center"><img
+                        src="yellow-glasses.png" class="w-[34px] xl:w-[38px] mb-2 xl:mb-3" alt="">
+                      <div class="py-1 px-3 text-[10px] xl:text-xs bg-black font-medium rounded">Choose</div>
+                    </button><button
+                      class="bg-transparent border-2 border-primary flex-1 xl:flex-auto h-[70px] xl:h-[90px] py-4 px-5 rounded-lg justify-center flex flex-col items-center"><img
+                        src="gem.svg" class="w-[20px] mb-2" alt="">
+                      <div class="text-xs xl:text-sm bg-black font-medium lh-1_2 rounded text-center">Gem Activated
+                      </div>
+                    </button></div>
+                  <div class="flex-1 flex flex-col justify-center space-y-3">
+                    <div class="space-y-2">
+                      <div class="h-[8px] w-full relative rounded-full overflow-hidden"
+                        style="background-color: rgb(31, 31, 31);">
+                        <div class="absolute top-0 left-0 h-full"
+                          style="background-color: rgb(255, 239, 0); width: 0%;"></div>
+                      </div>
+                      <div class="text-xs font-medium text-center">0 / 0</div>
+                    </div>
+                    <div class="space-y-2">
+                      <div class="h-[8px] w-full relative rounded-full overflow-hidden"
+                        style="background-color: rgb(31, 31, 31);">
+                        <div class="absolute top-0 left-0 h-full"
+                          style="background-color: rgb(60, 88, 238); width: 40%;"></div>
+                      </div>
+                      <div class="text-xs font-medium text-center">Level 0</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4"><a
+                    class="bg-primary flex-1 xl:flex-auto h-[70px] xl:h-[90px] py-4 px-5 rounded-lg justify-center flex flex-col items-center"
+                    href="https://script.tv/dashboard">
+                    <h1 class="fs-24px text-black font-semibold mb-1">0</h1>
+                    <h1 class="text-xs xl:text-sm text-black font-medium text-center">SPAY In WALLET</h1>
+                  </a><a
+                    class="bg-transparent border-2 border-primary flex-1 xl:flex-auto h-[70px] xl:h-[90px] py-4 px-5 rounded-lg justify-center flex flex-col items-center"
+                    href="https://script.tv/dashboard">
+                    <h1 class="fs-24px text-primary font-semibold mb-1 break-all">N/A</h1>
+                    <h1 class="text-xs xl:text-sm text-primary font-medium text-center">Earned Today</h1>
+                  </a></div>
+              </div>
+            </div>
+            <div class="mb-0 grid grid-cols-[106px_1fr] gap-3">
+              <div class=""></div>
+              <div class="flex items-center overflow-x-auto hide-scrollbar">
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">18:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-100 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">18:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">19:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">19:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">20:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">20:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">21:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">21:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">22:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">22:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">23:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">23:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">00:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">00:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">01:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">01:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">02:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">02:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">03:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">03:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">04:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">04:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">05:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">05:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">06:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">06:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">07:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">07:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">08:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">08:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">09:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">09:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">10:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">10:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">11:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">11:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">12:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">12:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">13:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">13:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">14:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">14:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">15:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">15:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">16:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">16:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">17:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">17:30</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+                <div class="min-w-[80px] md:min-w-[160px] flex flex-col items-start  justify-center">
+                  <p class="text-xs md:text-base lh-1">18:00</p><svg xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                    class="text-3xl opacity-0 iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24"
+                    style="margin-left: 45px;">
+                    <path fill="currentColor" d="m7 10l5 5l5-5H7z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div class="grid gap-3">
+              <div
+                class="grid grid-cols-[80px_1fr] md:grid-cols-[106px_1fr] gap-3 grid-rows-[80px] md:grid-rows-[106px]">
+                <div class="relative bg-shade-grayis rounded-md flex items-center justify-center px-4"><button
+                    class="flex absolute top-2 right-2 text-lg opacity-60"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                      </path>
+                    </svg></button><img
+                    src="1686649580791-SOFAST_logo-assets_1080x1080_EN-EN_black-removebg-preview.png" class="w-full"
+                    alt=""></div>
+                <div class="flex space-x-3 overflow-x-scroll hide-scrollbar">
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[1915px]  md:sticky left-0 right-0 z-50 "
+                    style="min-width: 1914.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Brussels, My Love ?</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:05 - 18:30</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-primary">
+                    </div>
+                  </div>
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[7675px]   "
+                    style="min-width: 7674.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Brussels, My Love ?</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:05 - 18:30</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-[80px_1fr] md:grid-cols-[106px_1fr] gap-3 grid-rows-[80px] md:grid-rows-[106px]">
+                <div class="relative bg-shade-grayis rounded-md flex items-center justify-center px-4"><button
+                    class="flex absolute top-2 right-2 text-lg opacity-60"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                      </path>
+                    </svg></button><img
+                    src="1686649119608-SOFAST_logo-assets_1080x1080_EN-ES_black-removebg-preview.png" class="w-full"
+                    alt=""></div>
+                <div class="flex space-x-3 overflow-x-scroll hide-scrollbar">
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[1915px]   "
+                    style="min-width: 1914.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Brussels, My Love ?</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:05 - 18:30</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[7675px]   "
+                    style="min-width: 7674.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Brussels, My Love ?</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:05 - 18:30</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-[80px_1fr] md:grid-cols-[106px_1fr] gap-3 grid-rows-[80px] md:grid-rows-[106px]">
+                <div class="relative bg-shade-grayis rounded-md flex items-center justify-center px-4"><button
+                    class="flex absolute top-2 right-2 text-lg opacity-60"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                      </path>
+                    </svg></button><img src="1687509996086-weshort_horizontal_no-payoff_white-logo[1].png"
+                    class="w-full" alt=""></div>
+                <div class="flex space-x-3 overflow-x-scroll hide-scrollbar">
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[1915px]   "
+                    style="min-width: 1914.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">WEATHER</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:06 - 18:10</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[7675px]   "
+                    style="min-width: 7674.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">WEATHER</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">18:06 - 18:10</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-[80px_1fr] md:grid-cols-[106px_1fr] gap-3 grid-rows-[80px] md:grid-rows-[106px]">
+                <div class="relative bg-shade-grayis rounded-md flex items-center justify-center px-4"><button
+                    class="flex absolute top-2 right-2 text-lg opacity-60"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                      </path>
+                    </svg></button><img src="1687260261375-edgy_urban_(1).png" class="w-full" alt=""></div>
+                <div class="flex space-x-3 overflow-x-scroll hide-scrollbar">
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[1915px]   "
+                    style="min-width: 1914.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">El Toro One Way</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">17:14 - 18:17</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[7675px]   "
+                    style="min-width: 7674.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">El Toro One Way</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">17:14 - 18:17</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-[80px_1fr] md:grid-cols-[106px_1fr] gap-3 grid-rows-[80px] md:grid-rows-[106px]">
+                <div class="relative bg-shade-grayis rounded-md flex items-center justify-center px-4"><button
+                    class="flex absolute top-2 right-2 text-lg opacity-60"><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                      class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                      </path>
+                    </svg></button><img src="1687510335304-lol_tv.png" class="w-full" alt=""></div>
+                <div class="flex space-x-3 overflow-x-scroll hide-scrollbar">
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[1915px]   "
+                    style="min-width: 1914.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Making Out</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">17:33 - 19:11</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                  <div
+                    class="cursor-pointer flex items-center px-4 md:px-10 bg-shade-grayis h-full rounded-md  relative z-10   md:min-w-[7675px]   "
+                    style="min-width: 7674.67px; margin-left: 0px; border-left: 2px solid black;">
+                    <div class="max-w-[200px] space-y-[2px] z-50">
+                      <p class="text-xs md:text-base font-medium two-lines-only">Making Out</p>
+                      <div class="flex items-center space-x-2">
+                        <p class="text-xs md:text-sm font-medium">17:33 - 19:11</p><button
+                          class="flex text-base opacity-80"><svg xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                            class="iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                              d="M11 17h2v-6h-2v6Zm1-8q.425 0 .713-.288T13 8q0-.425-.288-.713T12 7q-.425 0-.713.288T11 8q0 .425.288.713T12 9Zm0 13q-2.075 0-3.9-.788t-3.175-2.137q-1.35-1.35-2.137-3.175T2 12q0-2.075.788-3.9t2.137-3.175q1.35-1.35 3.175-2.137T12 2q2.075 0 3.9.788t3.175 2.137q1.35 1.35 2.138 3.175T22 12q0 2.075-.788 3.9t-2.137 3.175q-1.35 1.35-3.175 2.138T12 22Zm0-2q3.35 0 5.675-2.325T20 12q0-3.35-2.325-5.675T12 4Q8.65 4 6.325 6.325T4 12q0 3.35 2.325 5.675T12 20Zm0-8Z">
+                            </path>
+                          </svg></button>
+                      </div>
+                    </div>
+                    <div
+                      class="absolute top-0 left-0 w-full h-full rounded-md border-2 z-10 transition-all duration-200 border-transparent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="mb-12" id="mobileChat">
+        <div class="bg-shade-darkest-blue md:py-4 sm:py-0 py-4">
+          <div class="container"></div>
+        </div>
+      </div>
+      <div class="mb-12">
+        <section>
+          <div class="container">
+            <div class="bg-blue-link py-6 md:py-14 rounded-lg md:rounded-2xl text-center px-8">
+              <div class="space-y-1 mb-4 md:mb-6">
+                <h1 class="text-xl lg:text-3xl xl:text-4xl text-white font-bold text-center" style="line-height: 1.4;">
+                  100s of hours of films and tv shows</h1>
+                <h1 class="text-xl lg:text-3xl xl:text-4xl text-white font-bold text-center" style="line-height: 1.4;">
+                  <span class="text-primary">100% Free</span></h1>
+              </div>
+              <p class="text-sm md:text-base xl:text-xl max-w-[40rem] mx-auto">Drop in to over 100 of hit movies, binge-
+                worthy TV shows, cartoons, sports and more. Anytime, always for free.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="mb-16">
+        <section class="container">
+          <div class="mb-10 lg:mb-14">
+            <h1 class="text-xl lg:text-2xl xl:text-3xl text-white font-bold text-center" style="line-height: 1.4;">How
+              to Earn on <span class="text-primary">Script Network</span></h1>
+          </div>
+          <div class="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+            <div class="bg-shade-grayis rounded-2xl py-6 px-8">
+              <div class="mx-auto w-12 xl:w-20 h-12 xl:h-20 rounded-full overflow-hidden mb-4"><img src="earn-1.svg"
+                  alt="" class="w-full h-full"></div>
+              <h1 class="text-base lg:text-base xl:text-xl text-center text-primary font-semibold mb-3"
+                style="line-height: 1.4;">Mint a ScriptGLASS</h1>
+              <p class="text-center text-sm xl:text-base">No upfront costs - create and account and mint a ScriptGLASS
+                NFT in seconds! Each one completely unique and your pass to earn daily rewards.</p>
+            </div>
+            <div class="flex items-center justify-center text-xl xl:text-3xl"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                class="rotate-90 lg:rotate-0 iconify iconify--material-symbols" width="1em" height="1em"
+                viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M16.15 13H5q-.425 0-.713-.288T4 12q0-.425.288-.713T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.313t.712.288L19.3 11.3q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7L16.15 13Z">
+                </path>
+              </svg></div>
+            <div class="bg-shade-grayis rounded-2xl py-6 px-8">
+              <div class="mx-auto w-12 xl:w-20 h-12 xl:h-20 rounded-full overflow-hidden mb-4"><img src="earn-2.svg"
+                  alt="" class="w-full h-full"></div>
+              <h1 class="text-base lg:text-base xl:text-xl text-center text-primary font-semibold mb-3"
+                style="line-height: 1.4;">Watch TV</h1>
+              <p class="text-center text-sm xl:text-base">Upgrade your glasses, and watch from multiple channels
+                24/7/365, whilst connecting with other users, and get rewarded for doing so.</p>
+            </div>
+            <div class="flex items-center justify-center text-xl xl:text-3xl"><svg xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                class="rotate-90 lg:rotate-0 iconify iconify--material-symbols" width="1em" height="1em"
+                viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M16.15 13H5q-.425 0-.713-.288T4 12q0-.425.288-.713T5 11h11.15L13.3 8.15q-.3-.3-.288-.7t.288-.7q.3-.3.713-.313t.712.288L19.3 11.3q.15.15.213.325t.062.375q0 .2-.063.375t-.212.325l-4.575 4.575q-.3.3-.712.288t-.713-.313q-.275-.3-.288-.7t.288-.7L16.15 13Z">
+                </path>
+              </svg></div>
+            <div class="bg-shade-grayis rounded-2xl py-6 px-8">
+              <div class="mx-auto w-12 xl:w-20 h-12 xl:h-20 rounded-full overflow-hidden mb-4"><img src="earn-3.svg"
+                  alt="" class="w-full h-full"></div>
+              <h1 class="text-base lg:text-base xl:text-xl text-center text-primary font-semibold mb-3"
+                style="line-height: 1.4;">Stake and Run Nodes</h1>
+              <p class="text-center text-sm xl:text-base">Help secure and scale the future of Script Network and its
+                ecosystem by staking your tokens, or running a node - both with significant reward opportunities.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="mb-16">
+        <section class="container">
+          <div class="mb-10 lg:mb-16">
+            <h1 class="text-xl lg:text-2xl xl:text-3xl text-white font-bold text-center" style="line-height: 1.4;"><span
+                class="text-primary">Script Glass</span> Key Stats</h1>
+          </div>
+          <div class="grid md:grid-cols-2 items-center gap-10 md:gap-16">
+            <div class="flex items-center justify-center"><img src="glasses.svg" class="w-full lg:max-w-[22rem]" alt="">
+            </div>
+            <div class="space-y-6 md:space-y-4">
+              <div class="grid md:grid-cols-2 gap-3 md:gap-5 items-center">
+                <div class="bg-shade-grayis rounded-lg h-[50px] flex items-center px-5">
+                  <p class="fs-16px">39,767,656</p>
+                </div>
+                <p class="fs-16px row-start-1 row-end-2 md:row-start-auto md:row-end-auto">Minutes Watched</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3 md:gap-5 items-center">
+                <div class="bg-shade-grayis rounded-lg h-[50px] flex items-center px-5">
+                  <p class="fs-16px">14,397,921</p>
+                </div>
+                <p class="fs-16px row-start-1 row-end-2 md:row-start-auto md:row-end-auto">Script Points Earned by
+                  Viewers</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3 md:gap-5 items-center">
+                <div class="bg-shade-grayis rounded-lg h-[50px] flex items-center px-5">
+                  <p class="fs-16px">N/A</p>
+                </div>
+                <p class="fs-16px row-start-1 row-end-2 md:row-start-auto md:row-end-auto">Token Burned</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3 md:gap-5 items-center">
+                <div class="bg-shade-grayis rounded-lg h-[50px] flex items-center px-5">
+                  <p class="fs-16px">83,453</p>
+                </div>
+                <p class="fs-16px row-start-1 row-end-2 md:row-start-auto md:row-end-auto">Discord</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-3 md:gap-5 items-center">
+                <div class="bg-shade-grayis rounded-lg h-[50px] flex items-center px-5">
+                  <p class="fs-16px">0</p>
+                </div>
+                <p class="fs-16px row-start-1 row-end-2 md:row-start-auto md:row-end-auto">Twitter</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="mb-16 lg:mb-24"></div>
+      <div class="mb-20" id="tv-community">
+        <section>
+          <div
+            class="container grid md:grid-cols-[.5fr_1fr] lg:grid-cols-[.7fr_1fr] gap-10 lg:gap-14 xl:gap-20 items-start">
+            <div>
+              <div class="mb-4">
+                <h1 class="text-xl lg:text-2xl xl:text-3xl text-white font-bold" style="line-height: 1.4;">Join our
+                  <span class="text-primary">community</span></h1>
+              </div>
+              <p class="fs-18px text-white mb-11">Be part of a growing community of builders,users, and creators on
+                Script tv paving the way for a more interoperable crypto ecosystem.</p>
+              <div class="bg-primary flex items-center justify-center h-[283px] rounded-xl"><img
+                  src="community-image.png" alt=""></div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-5"><a href="https://discord.gg/scriptnetwork" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Discord</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://t.me/scriptnetworkann" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--file-icons" width="1em" height="1em" viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                      d="M470.435 45.423L16.827 221.249c-18.254 8.188-24.428 24.585-4.412 33.484l116.37 37.173l281.368-174.79c15.363-10.973 31.091-8.047 17.557 4.024L186.053 341.075l-7.591 93.076c7.031 14.371 19.905 14.438 28.117 7.295l66.858-63.589l114.505 86.187c26.595 15.826 41.066 5.613 46.788-23.394l75.105-357.47c7.798-35.705-5.5-51.437-39.4-37.757z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Telegram</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://twitter.com/script_network" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--mdi" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M22.46 6c-.77.35-1.6.58-2.46.69c.88-.53 1.56-1.37 1.88-2.38c-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29c0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15c0 1.49.75 2.81 1.91 3.56c-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07a4.28 4.28 0 0 0 4 2.98a8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21C16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56c.84-.6 1.56-1.36 2.14-2.23Z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Twitter</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://medium.com/script-network" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--bi" width="1em" height="1em" viewBox="0 0 16 16">
+                    <path fill="currentColor"
+                      d="M9.025 8c0 2.485-2.02 4.5-4.513 4.5A4.506 4.506 0 0 1 0 8c0-2.486 2.02-4.5 4.512-4.5A4.506 4.506 0 0 1 9.025 8zm4.95 0c0 2.34-1.01 4.236-2.256 4.236c-1.246 0-2.256-1.897-2.256-4.236c0-2.34 1.01-4.236 2.256-4.236c1.246 0 2.256 1.897 2.256 4.236zM16 8c0 2.096-.355 3.795-.794 3.795c-.438 0-.793-1.7-.793-3.795c0-2.096.355-3.795.794-3.795c.438 0 .793 1.699.793 3.795z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Blog</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://www.instagram.com/script_network/" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--ri" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M13.028 2.001a78.82 78.82 0 0 1 2.189.022l.194.007c.224.008.445.018.712.03c1.064.05 1.79.218 2.427.465c.66.254 1.216.598 1.772 1.154a4.908 4.908 0 0 1 1.153 1.771c.247.637.415 1.364.465 2.428c.012.266.022.488.03.712l.006.194a79 79 0 0 1 .023 2.188l.001.746v1.31a78.836 78.836 0 0 1-.023 2.189l-.006.194c-.008.224-.018.445-.03.712c-.05 1.064-.22 1.79-.466 2.427a4.884 4.884 0 0 1-1.153 1.772a4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.427.465c-.267.012-.488.022-.712.03l-.194.006a79 79 0 0 1-2.189.023l-.746.001h-1.309a78.836 78.836 0 0 1-2.189-.023l-.194-.006a60.64 60.64 0 0 1-.712-.03c-1.064-.05-1.79-.22-2.428-.466a4.89 4.89 0 0 1-1.771-1.153a4.904 4.904 0 0 1-1.154-1.772c-.247-.637-.415-1.363-.465-2.427a74.367 74.367 0 0 1-.03-.712l-.005-.194A79.053 79.053 0 0 1 2 13.028v-2.056a78.82 78.82 0 0 1 .022-2.188l.007-.194c.008-.224.018-.446.03-.712c.05-1.065.218-1.79.465-2.428A4.88 4.88 0 0 1 3.68 3.68a4.897 4.897 0 0 1 1.77-1.155c.638-.247 1.363-.415 2.428-.465l.712-.03l.194-.005A79.053 79.053 0 0 1 10.972 2h2.056Zm-1.028 5A5 5 0 1 0 12 17a5 5 0 0 0 0-10Zm0 2A3 3 0 1 1 12.001 15a3 3 0 0 1 0-6Zm5.25-3.5a1.25 1.25 0 0 0 0 2.498a1.25 1.25 0 0 0 0-2.5Z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Instagram</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://github.com/scriptnetwork" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><svg
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                    role="img" class="iconify iconify--mdi" width="1em" height="1em" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z">
+                    </path>
+                  </svg></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Github</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a><a href="https://www.threads.net/@script_network" target="_blank"
+                class="flex items-center bg-shade-darkest-blue rounded-xl h-[70px] lg:h-[80px] px-8 xl:px-11 hover:bg-shade-dark-blue-2 transition-all duration-100">
+                <div class="w-[3rem] lg:w-[3.6rem] xl:w-[4rem] text-2xl lg:text-3xl"><img src="threads_logo.png"
+                    style="width: 30px; height: 30px; filter: invert(1);"></div>
+                <div class="flex-1">
+                  <div class="flex items-center space-x-2">
+                    <p class="text-base lg:text-lg text-white font-bold">Threads</p><span
+                      class="text-base lg:text-lg text-white"><svg xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img"
+                        class="iconify iconify--ic" width="1em" height="1em" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                          d="M6 7c0 .55.45 1 1 1h7.59l-8.88 8.88a.996.996 0 1 0 1.41 1.41L16 9.41V17c0 .55.45 1 1 1s1-.45 1-1V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1z">
+                        </path>
+                      </svg></span>
+                  </div>
+                </div>
+              </a></div>
+          </div>
+        </section>
+      </div>
+      <div class="bg-shade-darkest-blue">
+        <div class="py-11">
+          <div
+            class="container grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_1fr_auto] gap-y-8 md:gap-y-0 md:flex justify-between">
+            <div class="">
+              <h4 class="text-base xl:text-lg uppercase font-bold mb-4">PRODUCTS</h4>
+              <div class="space-y-3"><a class="block text-xs xl:text-sm cursor-pointer w-fit" href=""
+                  target="_self">Script TV</a><a href="https://token.script.tv/research" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Script Glass</a><a
+                  href="https://token.script.tv/marketplace" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Marketplace</a><a
+                  href="https://partners.script.tv/#/partner/script" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">dStorage</a><a
+                  href="https://token.script.tv/node" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Script Blockchain</a><a
+                  href="https://token.script.tv/" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">sADs</a></div>
+            </div>
+            <div class="">
+              <h4 class="text-base xl:text-lg uppercase font-bold mb-4">INFORMATION</h4>
+              <div class="space-y-3"><a href="https://token.script.tv/research" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Script Network Explained</a><a
+                  href="https://token.script.tv/token" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Script Tokens</a><a
+                  href="https://token.script.tv/calculator" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Calculator</a><a
+                  href="https://token.script.tv/node" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Run a node</a><a
+                  class="block text-xs xl:text-sm cursor-pointer w-fit" href="https://script.tv/report-issue"
+                  target="_self">Report Issue</a><a href="https://token.script.tv/download" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Download</a><a href="https://status.script.tv/"
+                  target="_blank" class="block text-xs xl:text-sm cursor-pointer w-fit">Status</a><a
+                  href="https://token.script.tv/how-to-buy" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">How to buy</a></div>
+            </div>
+            <div class="">
+              <h4 class="text-base xl:text-lg uppercase font-bold mb-4">Community</h4>
+              <div class="space-y-3"><a href="https://discord.gg/scriptnetwork" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Discord</a><a
+                  href="https://twitter.com/script_network" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Twitter</a><a
+                  href="https://medium.com/script-network" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Blog</a><a
+                  href="https://www.instagram.com/script_network/" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Instagram</a><a
+                  href="https://github.com/scriptnetwork" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Github</a><a
+                  href="https://t.me/scriptnetworkann" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Telegram</a></div>
+            </div>
+            <div class="">
+              <h4 class="text-base xl:text-lg uppercase font-bold mb-4">TERMS</h4>
+              <div class="space-y-3"><a href="https://token.script.tv/terms-and-conditions" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Terms of Service</a><a
+                  href="https://token.script.tv/privacy-policy" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Privacy Policy</a><a
+                  href="https://token.script.tv/cookies-policy" target="_blank"
+                  class="block text-xs xl:text-sm cursor-pointer w-fit">Cookies Policy</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><noscript>
+      <div style="display:none"><img src="p-9-96FLXge2SKn.gif" border="0" height="1" width="1" alt="Quantcast"></div>
+    </noscript></footer><iframe name="__tcfapiLocator" style="display: none;" src="index_2.html"></iframe>
+  <div
+    style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;">
+    <div
+      style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;">
+    </div>
+    <div class="g-recaptcha-bubble-arrow"
+      style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;">
+    </div>
+    <div class="g-recaptcha-bubble-arrow"
+      style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;">
+    </div>
+    <div style="z-index: 2000000000; position: relative;"><iframe title="recaptcha challenge expires in two minutes"
+        src="index_5.html" name="c-51tbb14vofm9" frameborder="0" scrolling="no"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
+        style="width: 100%; height: 100%;"></iframe></div>
+  </div>
+  <div
+    style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;">
+    <div
+      style="width: 100%; height: 100%; position: fixed; top: 0px; left: 0px; z-index: 2000000000; background-color: rgb(255, 255, 255); opacity: 0.05;">
+    </div>
+    <div class="g-recaptcha-bubble-arrow"
+      style="border: 11px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -11px; z-index: 2000000000;">
+    </div>
+    <div class="g-recaptcha-bubble-arrow"
+      style="border: 10px solid transparent; width: 0px; height: 0px; position: absolute; pointer-events: none; margin-top: -10px; z-index: 2000000000;">
+    </div>
+    <div style="z-index: 2000000000; position: relative;"><iframe title="recaptcha challenge expires in two minutes"
+        src="index_6.html" name="c-8kyef0bkzlz5" frameborder="0" scrolling="no"
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"
+        style="width: 100%; height: 100%;"></iframe></div>
+  </div>
+</body>
+
+</html>
